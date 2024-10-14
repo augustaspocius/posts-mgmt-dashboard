@@ -1,25 +1,22 @@
-import { PostType, Post } from "./Post.tsx";
+import { Post } from "./Post.tsx";
+import { UserType } from "../types.tsx";
 
-type UserType = {
-  name: string;
-  posts: PostType[];
-};
-
-export default function User({ name, posts }: UserType) {
+export default function User({ id, name, posts }: UserType) {
   return (
-    <div className="my-4">
+    <li key={id} className="my-4">
       <h2>{name} posts: </h2>
       <ul>
         {posts.map((post) => {
           return (
             <Post
               id={post.id}
-              content={post.content}
+              title={post.title}
+              body={post.body}
               comments={post.comments}
             />
           );
         })}
       </ul>
-    </div>
+    </li>
   );
 }

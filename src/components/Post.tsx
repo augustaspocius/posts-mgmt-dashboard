@@ -1,24 +1,14 @@
-import { CommentType, Comment } from "./Comment.tsx";
+import { Comment } from "./Comment.tsx";
+import { PostType } from "../types.tsx";
 
-export type PostType = {
-  id: string;
-  content: string;
-  comments: CommentType[];
-};
-
-export function Post({ id, content, comments }: PostType) {
+export function Post({ userid, title, body, comments }: PostType) {
   return (
-    <li key={id}>
-      <p>{content}</p>
+    <li key={userid}>
+      <h4>{title}</h4>
+      <p>{body}</p>
       <ul>
         {comments.map((comment) => {
-          return (
-            <Comment
-              commentId={comment.commentId}
-              comment={comment.comment}
-              author={comment.author}
-            ></Comment>
-          );
+          return <Comment {...comment}></Comment>;
         })}
       </ul>
     </li>
