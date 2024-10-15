@@ -8,11 +8,13 @@ export async function getUsersData({
   queryKey: (string | number | undefined)[];
 }): Promise<UserType[]> {
   const id = queryKey[1];
-  const limit = queryKey[2];
+  const page = queryKey[2];
+  const limit = queryKey[3];
   const response = await fetch(
     `${BASE_URL}/users` +
       (id ? `/${id}` : "") +
-      (limit ? "?_limit=" + `${limit}` : ""),
+      (page ? "?_page=" + `${page}` : "") +
+      (limit ? "&_limit=" + `${limit}` : ""),
   );
 
   if (!response.ok) {
@@ -39,6 +41,7 @@ export async function getUsersData({
       );
 
       return {
+        id: user.id,
         name: user.name,
         username: user.username,
         email: user.email,
@@ -49,7 +52,7 @@ export async function getUsersData({
 }
 
 export async function getUserPosts(userId: number): Promise<PostType[]> {
-  const response = await fetch(`${BASE_URL}/users/${userId}/posts?_limit=3`);
+  const response = await fetch(`${BASE_URL}/users/${userId}/posts`);
 
   if (!response.ok) {
     throw new Error(`${BASE_URL}/users/${userId}/posts is not ok`);
@@ -59,7 +62,7 @@ export async function getUserPosts(userId: number): Promise<PostType[]> {
 }
 
 export async function getPostComments(postId: number): Promise<CommentType[]> {
-  const response = await fetch(`${BASE_URL}/posts/${postId}/comments?_limit=4`);
+  const response = await fetch(`${BASE_URL}/posts/${postId}/comments`);
 
   if (!response.ok) {
     throw new Error(`${BASE_URL}/posts/${postId}/comments is not ok`);
