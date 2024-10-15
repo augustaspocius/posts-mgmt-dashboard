@@ -1,5 +1,6 @@
 import "./App.css";
 import User from "./components/User.tsx";
+import { Fragment } from "react/jsx-runtime";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getUsersData } from "./services/apiService.tsx";
 
@@ -36,7 +37,7 @@ function App() {
     return (
       <div className="container mx-auto">
         {data.pages.map((group, i) => (
-          <ul key={i}>
+          <Fragment key={i}>
             {group.map((user) => (
               <User
                 key={user.id}
@@ -45,9 +46,10 @@ function App() {
                 posts={user.posts}
               ></User>
             ))}
-          </ul>
+          </Fragment>
         ))}
         <button
+          className="border-1 rounded-md border border-black bg-white px-4 py-2 outline-1"
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
         >
