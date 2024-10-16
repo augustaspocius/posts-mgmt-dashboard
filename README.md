@@ -1,7 +1,7 @@
 
 # Posts Management Dashboard project
 
-A short demo project to showcase users and their posts/comments. This project uses mock [JSON API](https://jsonplaceholder.typicode.com/) to fill users, posts and comments. You can freely add or remove user posts
+A short demo project to showcase users and their posts/comments. This project uses mock [JSON API](https://jsonplaceholder.typicode.com/) to fill users, posts and comments. You can freely add or remove user posts as well
 
 
 
